@@ -6,57 +6,36 @@
 /*   By: lalhindi <lalhindi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 00:08:23 by lalhindi          #+#    #+#             */
-/*   Updated: 2024/12/15 00:01:17 by lalhindi         ###   ########.fr       */
+/*   Updated: 2024/12/19 01:35:30 by lalhindi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include <stdio.h>
-#include <unistd.h>
+#include "ft_printf.h"
 
-int	ft_test(char c, va_list str)
+int	ft_specifier(char c, va_list str)
 {
 	int	length;
 
 	length = 0;
 	if (c == 'c')
-	{
-		len = ft_char(va_arg(str, int))
-	}
+		length = ft_char(va_arg(str, int));
 	else if (c == 's')
-	{
-		len = ft_str(va_arg(str, char *))
-	}
+		length = ft_str(va_arg(str, char *));
 	else if (c == 'p')
-	{
-		len = ft_str(va_arg(str, char *))
-	}
-	else if (c == 'd')
-	{
-		len = ft_str(va_arg(str, char *))
-	}
-	else if (c == 'i')
-	{
-		len = ft_str(va_arg(str, char *));
-	}
+		length = ft_pointer(va_arg(str, void *));
+	else if (c == 'd' || c == 'i')
+		length = ft_number_signed(va_arg(str, int));
 	else if (c == 'u')
-	{
-		len = ft_str(va_arg(str, char *));
-	}
+		length = ft_unsigned(va_arg(str, unsigned int), 0, 10);
 	else if (c == 'x')
-	{
-		len = ft_str(va_arg(str, char *));
-	}
+		length = ft_unsigned(va_arg(str, unsigned int), 0, 16);
 	else if (c == 'X')
-	{
-		len = ft_str(va_arg(str, char *));
-	}
+		length = ft_unsigned(va_arg(str, unsigned int), 1, 16);
 	else if (c == '%')
-	{
-		ft_str(va_arg(str, char *));
-	}
+		length = ft_char('%');
 	return (length);
 }
+
 int	ft_printf(const char *format, ...)
 {
 	va_list	args;
@@ -70,8 +49,8 @@ int	ft_printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			// char *str = va_arg(args,char *);
-			length += ft_test(format[i + 1], args);
+			length += ft_specifier(format[i + 1], args);
+			i++;
 		}
 		else
 		{
@@ -79,14 +58,7 @@ int	ft_printf(const char *format, ...)
 			length++;
 		}
 		i++;
-		length++;
 	}
 	va_end(args);
 	return (length);
-}
-int	main(void)
-{
-	// ft_printf("hello %s %x %X %i %d % %%", "world");
-	printf("%s hello ", "world %s", "loay");
-	return (0);
 }
