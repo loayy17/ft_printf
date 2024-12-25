@@ -6,7 +6,7 @@
 /*   By: lalhindi <lalhindi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 01:17:38 by lalhindi          #+#    #+#             */
-/*   Updated: 2024/12/19 01:39:15 by lalhindi         ###   ########.fr       */
+/*   Updated: 2024/12/25 23:37:53 by lalhindi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@ int	ft_ulong(unsigned long n)
 
 	len = 0;
 	if (n > 15)
+	{
 		len = ft_ulong(n / 16);
-	write(1, "0123456789abcdef" + n % 16, 1);
-	return (len + 1);
+		len += ft_ulong(n % 16);
+	}
+	else
+		len += write(1, &"0123456789abcdef"[n], 1);
+	return (len);
 }

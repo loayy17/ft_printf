@@ -6,28 +6,30 @@
 /*   By: lalhindi <lalhindi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 23:38:18 by lalhindi          #+#    #+#             */
-/*   Updated: 2024/12/19 01:39:25 by lalhindi         ###   ########.fr       */
+/*   Updated: 2024/12/25 23:40:55 by lalhindi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_unsigned(unsigned int n, int x, int base)
+int	ft_unsigned(unsigned int n, int x, unsigned int base)
 {
-	int	len;
+	int				len;
+	unsigned int	remain;
 
 	len = 0;
-	if (n > (unsigned int)base - 1)
+	if (n > base - 1)
 	{
 		len = ft_unsigned((n / base), x, base);
 	}
+	remain = n % base;
 	if (x == 1)
 	{
-		write(1, "0123456789ABCDEF" + n % base, 1);
+		len += write(1, &"0123456789ABCDEF"[remain], 1);
 	}
 	else if (x == 0)
 	{
-		write(1, "0123456789abcdef" + n % base, 1);
+		len += write(1, &"0123456789abcdef"[remain], 1);
 	}
-	return (len + 1);
+	return (len);
 }

@@ -6,7 +6,7 @@
 /*   By: lalhindi <lalhindi@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:17:58 by lalhindi          #+#    #+#             */
-/*   Updated: 2024/12/19 15:18:32 by lalhindi         ###   ########.fr       */
+/*   Updated: 2024/12/25 00:10:29 by lalhindi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int	ft_str(char *str);
 int	ft_pointer(void *p);
 int	ft_ulong(unsigned long n);
 int	ft_number_signed(int n);
-int	ft_unsigned(unsigned int n, int x, int base);
+int	ft_unsigned(unsigned int n, int x, unsigned int base);
 int	ft_printf(const char *format, ...);
 #endif
